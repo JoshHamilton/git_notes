@@ -65,7 +65,9 @@ log - lists the commits made in the reposity in reverse chronological order.
 
 reset HEAD <file> - unstages a staged file.
 
-checkout -- <file> - unmodifies a modified file. Don't ever use this command unless you absolutely know that you don't want the file. 
+checkout - Change branches. 
+  "checkout -b <branch-name>" - creates the branch and switches to it.
+  "checkout -- <file>" - unmodifies a modified file. Don't ever use this command unless you absolutely know that you don't want the file. 
 
 remote - shows remote servers. "origin" is the default name git gives to teh server you cloned from. 
   "remote -v" - shows you the URL that git has stored for the shortname to be expanded to.
@@ -88,6 +90,8 @@ tag - lists the tags in alphabetical order. Git uses two types of tags: lightwei
   "git push origin <tag>" - by default, the git push command doesn't tranfer tags to the remote servers. You have to explicity push tags to a shared server after you have created them. This process is just like sharing remote branches.
  
 show [tag-name] - display the tag data along with the commit that was tagged.
+
+branch - create a new branch.
 
 ALIASES:
 $ git config --global alias.co checkout

@@ -72,14 +72,14 @@ checkout - Change branches.
 
 remote - shows remote servers. "origin" is the default name git gives to teh server you cloned from. 
   "remote -v" - shows you the URL that git has stored for the shortname to be expanded to.
-  "remote add [shortname] [url]" - add a new remote git repository. can use shortname for easy access.
+  "remote add <shortname> <url>" - add a new remote git repository. can use shortname for easy access.
   "remote show" - displays the URL for the remote repository as well as the tracking branch information.
   "remote rename" - rename a remote's shortname.
   "remote rm" - remove a reference.
 
-fetch [remote-name] - goes out to the remote project and pulls down all the data from that remote project that you don't have yet. Unlike pull, it does not automatically merge what it pulls into your local repository. 
+fetch <remote-name> - goes out to the remote project and pulls down all the data from that remote project that you don't have yet. Unlike pull, it does not automatically merge what it pulls into your local repository. 
 
-push [remote-name] [branch-name] - push your master branch to your origin server. Use case: if you have cloned from a server to which you have write access and noboy has pushed in the meantime, you can run "git push origin master" (clone generally sets the names for you automagically). This command would not work if someone else had pushed to the server first. You would then pull down their work first and incorporate it into yours before you'll be allowed to push again. 
+push <remote-name> <branch-name> - push your master branch to your origin server. Use case: if you have cloned from a server to which you have write access and noboy has pushed in the meantime, you can run "git push origin master" (clone generally sets the names for you automagically). This command would not work if someone else had pushed to the server first. You would then pull down their work first and incorporate it into yours before you'll be allowed to push again. 
 
 tag - lists the tags in alphabetical order. Git uses two types of tags: lightweight and annotated. A lightweight tag is very much like a branch that doesn't change -- it's just a pointer to a specific comment. Annotated tags are stored as full objects in the git databse. They're checksummed; contain the tagger name, email, and date; have a tagging message; and can be signed and verified with GNU privacy guard (PGP). It's generally recommended to create annotated tags so you can have all this information.
   "tag -l 'string to search for with optional wildcard)'" - show all tags matching the specified string.
@@ -90,7 +90,7 @@ tag - lists the tags in alphabetical order. Git uses two types of tags: lightwei
   "tag -a <tag> <checksum>" - tag a commit that you've already moved past. You can specify with just part of the checksum.
   "git push origin <tag>" - by default, the git push command doesn't tranfer tags to the remote servers. You have to explicity push tags to a shared server after you have created them. This process is just like sharing remote branches.
  
-show [tag-name] - display the tag data along with the commit that was tagged.
+show <tag-name> - display the tag data along with the commit that was tagged.
 
 branch - create a new branch.
   "branch -d <branch-name>" - delete a branch.

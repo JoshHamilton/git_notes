@@ -92,8 +92,12 @@ tag - lists the tags in alphabetical order. Git uses two types of tags: lightwei
  
 show <tag-name> - display the tag data along with the commit that was tagged.
 
-branch - create a new branch.
+branch - lists current branches.
+  "branch <branch-name>" - creates a branch.
   "branch -d <branch-name>" - delete a branch.
+  "branch -v" - see the last commit on each branch.
+  "branch --merged" - see which branches are already merged into the branch you're on.
+  "branch --no-merged" - see all the branches that contain work you haven't yet merged in. You cannot delete branches with the normal command that have changes not merged into your current HEAD. You can force deletion with the "-D" option.
 
 merge - Integrate one branch into another. Use case: "git merge master", merge changes applied to master into the branch you're working on. Use case: "git checkout master <enter> git merge <my branch>", merge my branch into the master branch. Git automatically identifies the best common-ancestor merge base for branch merging. If you changed the same part of the file differently in the two branches you're merging together, git won't be able to merge them cleanly. Anything that has merge conflicts and hasn't been resolved is listed as unmerged. Git adds standard conflict-resolution markers to the files that have conflicts. After you've resolved each of the <<<<<<, =======, and >>>>>> sections in each conflicting file, run "git add" on each file to mark it as resolved. Staging the file (obviously) marks it as resolved in git. A graphical tool to resolve these issues is "git mergetool", which walks you through the conflicts. 
 

@@ -24,7 +24,8 @@ mv - git doesn't explicitly track file movement. Git figures that out after the 
   git add <file>
   "git mv <file> NEWNAME.txt" - convenience function.
   
-log - lists the commits made in the reposity in reverse chronological order.
+log - lists the commits made in the rep
+sity in reverse chronological order.
   "log -p" - shows the diff introduced in each commit.
   "log -2" - limits the output to only the last two entries.
   "log --stat" - display some abbreviated stats for each commit.
@@ -92,6 +93,8 @@ tag - lists the tags in alphabetical order. Git uses two types of tags: lightwei
 show [tag-name] - display the tag data along with the commit that was tagged.
 
 branch - create a new branch.
+
+merge - Integrate one branch into another.
 
 ALIASES:
 $ git config --global alias.co checkout

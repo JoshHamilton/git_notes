@@ -1,0 +1,103 @@
+FILES:
+.gitignore - place to identify classes of files that you don't want git to show.
+
+COMMANDS:
+status - determine which files are in which state.
+
+add - to begin tracking new files, to stage files, and to do things like marking merge-conflicted files as resolved. (If you modify a file after you run "git add", you have to run "git add" again to stage the latest version of the file.
+
+diff - used most often to answer two questions: what have you changed but not yet staged? and what have you staged that you are about to commit? "git status" answers them generally but "git diff" shows you the exact lines added and removed (the patch).
+  "git diff" - compares what is in your working directory with what is in your staging area. The result tells you the changes you've made that you haven't staged.
+  "git diff --staged" - compares your staged changes to your last commit. The result shows you what you've staged that will go into your next commit.
+  
+commit - records staged changes. Creates a SHA-1 checksum as the identifier of the commit. Shows how many files were changed and statistics about the lines added or removed in the commit. Defaultly opens the assigned text editor for entering comments about the commit. 
+  "commit -m" - skips opening the text editor and allows you to enter the commit message within the command.
+  "commit -a -m" - automatically stages every file that is already being tracked before doing the commit. Effectively skips using the staging area as a workflow element.
+  "commit --amend" - takes your staging area and uses it for the commit (Use case: commited too early and forgot to add some files or messed up your commit message).
+
+rm - to remove a file from git, you have to remove it from being tracked (staged) and then commit. "git rm" does that and also removes the file from your working directory so you don't see it as an untracked file. If you simply remove the file from your working directory, it shows up under "changed but not updated" (that is, unstaged). If you modified the file and added it to the index already, you must force the removal with the -f option. 
+  "git rm --cached" - allows you to keep the file in your working tree but remove it from your staging area. Particularly useful if you forgot to add something to your .gitignore file and accidentally added it.
+
+mv - git doesn't explicitly track file movement. Git figures that out after the fact. Effectively does the following: 
+  mv <file>
+  git rm <file>
+  git add <file>
+  "git mv <file> NEWNAME.txt" - convenience function.
+  
+log - lists the commits made in the reposity in reverse chronological order.
+  "log -p" - shows the diff introduced in each commit.
+  "log -2" - limits the output to only the last two entries.
+  "log --stat" - display some abbreviated stats for each commit.
+  "log --pretty" - changes the log output to formats other than the default.
+    "log --pretty=oneline"
+    "log --pretty=format:"%h - %an, %ar : %s""
+      Most useful format options:
+        Option	Description of Output
+        %H	Commit hash
+        %h	Abbreviated commit hash
+        %T	Tree hash
+        %t	Abbreviated tree hash
+        %P	Parent hashes
+        %p	Abbreviated parent hashes
+        %an	Author name
+        %ae	Author e-mail
+        %ad	Author date (format respects the –date= option)
+        %ar	Author date, relative
+        %cn	Committer name
+        %ce	Committer email
+        %cd	Committer date
+        %cr	Committer date, relative
+        %s	Subject
+    "log --pretty=short" or full or fuller
+  "log --graph" - shows a nice little ASCII graph showing your branch and merge history.
+  "log --name-only" -	show the list of files modified after the commit information.
+  "log --name-status" - show the list of files affected with added/modified/deleted information as well.
+  "log --since" - show log of commits since a stated time.
+    "log --since=2.weeks"
+  "log --until" - show log of commits until a stated time.
+  Common log commands table:
+    Option	Description
+    -(n)	Show only the last n commits
+    --since, --after	Limit the commits to those made after the specified date.
+    --until, --before	Limit the commits to those made before the specified date.
+    --author	Only show commits in which the author entry matches the specified string.
+    --committer	Only show commits in which the committer entry matches the specified string.
+
+reset HEAD <file> - unstages a staged file.
+
+checkout -- <file> - unmodifies a modified file. Don't ever use this command unless you absolutely know that you don't want the file. 
+
+remote - shows remote servers. "origin" is the default name git gives to teh server you cloned from. 
+  "remote -v" - shows you the URL that git has stored for the shortname to be expanded to.
+  "remote add [shortname] [url]" - add a new remote git repository. can use shortname for easy access.
+  "remote show" - displays the URL for the remote repository as well as the tracking branch information.
+  "remote rename" - rename a remote's shortname.
+  "remote rm" - remove a reference.
+
+fetch [remote-name] - goes out to the remote project and pulls down all the data from that remote project that you don't have yet. Unlike pull, it does not automatically merge what it pulls into your local repository. 
+
+push [remote-name] [branch-name] - push your master branch to your origin server. Use case: if you have cloned from a server to which you have write access and noboy has pushed in the meantime, you can run "git push origin master" (clone generally sets the names for you automagically). This command would not work if someone else had pushed to the server first. You would then pull down their work first and incorporate it into yours before you'll be allowed to push again. 
+
+tag - lists the tags in alphabetical order. Git uses two types of tags: lightweight and annotated. A lightweight tag is very much like a branch that doesn't change -- it's just a pointer to a specific comment. Annotated tags are stored as full objects in the git databse. They're checksummed; contain the tagger name, email, and date; have a tagging message; and can be signed and verified with GNU privacy guard (PGP). It's generally recommended to create annotated tags so you can have all this information.
+  "tag -l 'string to search for with optional wildcard)'" - show all tags matching the specified string.
+  "tag -a -m" - create an annotated tag. Use case: "git tag -a v1.4 -m 'my version 1.4'".
+  "tag -s" - create signed tag with GPG. Substitue -s for -a.
+  "tag <tag>" - create a lightweight tag. This is basically the commit checksum stored in a file -- no other information is kept. To create a lightweight tag, don't supply the -a, -s, or -m option. 
+  "tag -v <tag>" - verify a signed tag. You need the signer's public key in your keyring for this to work. 
+  "tag -a <tag> <checksum>" - tag a commit that you've already moved past. You can specify with just part of the checksum.
+  "git push origin <tag>" - by default, the git push command doesn't tranfer tags to the remote servers. You have to explicity push tags to a shared server after you have created them. This process is just like sharing remote branches.
+ 
+show [tag-name] - display the tag data along with the commit that was tagged.
+
+ALIASES:
+$ git config --global alias.co checkout
+$ git config --global alias.br branch
+$ git config --global alias.ci commit
+$ git config --global alias.st status
+$ git config --global alias.unstage 'reset HEAD --'
+$ git config --global alias.last 'log -1 HEAD'
+
+
+ 
+
+
